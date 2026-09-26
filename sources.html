@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discovery Sources · ZENTRA Reach</title>
+  <link rel="stylesheet" href="assets/zentra.css">
+  <link rel="stylesheet" href="assets/reach.css">
+  <script src="assets/theme-boot.js"></script>
+  <style>
+    :root {
+      --card: var(--navy-panel);
+      --page-bg: var(--navy-deep);
+      --line: var(--hairline-soft);
+      --radius: var(--r-md);
+      --radius-sm: var(--r-sm);
+      --ink: var(--text-primary);
+      --ink-2: var(--text-body);
+      --ink-3: var(--text-muted);
+    }
+    :root.theme-light {
+      --card: #ffffff;
+      --page-bg: #f5f7f9;
+      --line: #e2e8f0;
+      --ink: #16222f;
+      --ink-2: #3a4a5a;
+      --ink-3: #5f6b7a;
+    }
+    body { background: var(--page-bg); }
+
+    /* App header */
+    .reach-header {
+      position: sticky; top: 0; z-index: 60;
+      background: rgba(7, 17, 32, 0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--hairline-soft);
+    }
+    .reach-header .inner {
+      display: flex; align-items: center; gap: 20px;
+      max-width: var(--wrap, 1120px); margin: 0 auto;
+      padding: 0 24px; min-height: 64px;
+    }
+    .reach-brand {
+      display: flex; align-items: center; gap: 10px;
+      margin-right: auto; text-decoration: none;
+    }
+    .reach-brand img { width: 32px; height: 32px; }
+    .reach-brand span {
+      font-size: 17px; font-weight: 800; letter-spacing: 0.12em;
+      background: var(--grad-gold);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .reach-nav {
+      display: flex; align-items: center; gap: 4px;
+    }
+    .reach-nav .nav-group {
+      display: flex; align-items: center; gap: 2px;
+      padding: 0 8px;
+    }
+    .reach-nav .nav-group + .nav-group {
+      border-left: 1px solid var(--hairline-soft);
+    }
+    .reach-nav a {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 12px; border-radius: var(--r-sm);
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      transition: all 0.18s ease; white-space: nowrap;
+    }
+    .reach-nav a:hover { color: var(--text-primary); background: rgba(255,255,255,0.04); }
+    .reach-nav a.active {
+      color: var(--gold-core); font-weight: 700;
+      background: rgba(201,162,39,0.08);
+    }
+    .nav-group-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted); opacity: 0.5;
+      padding: 0 6px; margin-right: 2px;
+    }
+    @media (max-width: 820px) {
+      .reach-nav .nav-group-label { display: none; }
+    }
+    @media (max-width: 720px) {
+      .reach-nav { display: none; }
+    }
+
+    /* Page layout */
+    .page { max-width: var(--wrap, 1120px); margin: 0 auto; padding: 28px 24px 60px; }
+
+    /* Source card enhancements */
+    .src-card .src-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+    .src-card .src-icon {
+      width: 40px; height: 40px; border-radius: var(--r-sm);
+      border: 1px solid var(--line); background: var(--page-bg);
+      display: grid; place-items: center; font-size: 18px; flex-shrink: 0;
+    }
+    .src-card .src-prospects {
+      font-size: 13px; font-weight: 700; color: var(--ink); text-align: right;
+    }
+    .src-card .src-prospects small {
+      display: block; font-weight: 400; font-size: 10px;
+      text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-3);
+    }
+
+    /* Status badges */
+    .sbadge {
+      display: inline-flex; align-items: center; gap: 5px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 12px; border-radius: var(--r-pill); white-space: nowrap;
+    }
+    .sbadge-connected { background: rgba(16,185,129,0.12); color: #10b981; }
+    .sbadge-active    { background: rgba(16,185,129,0.12); color: #10b981; }
+    .sbadge-manual    { background: rgba(245,158,11,0.12); color: #f59e0b; }
+    .sbadge-off       { background: rgba(239,68,68,0.08); color: #ef4444; }
+    .sbadge-nc        { background: rgba(139,92,246,0.08); color: #8b5cf6; }
+
+    /* Dimmed source card */
+    .src-card.dimmed { opacity: 0.45; }
+    .src-card.dimmed:hover { opacity: 0.65; }
+
+    /* Tips list */
+    .tips-list { list-style: none; padding: 0; margin: 0; }
+    .tips-list li {
+      position: relative; padding: 10px 0 10px 22px;
+      font-size: 13.5px; color: var(--ink-2);
+      border-bottom: 1px solid var(--line);
+    }
+    .tips-list li:last-child { border-bottom: none; }
+    .tips-list li::before {
+      content: '◆'; position: absolute; left: 0; top: 10px;
+      font-size: 8px; color: var(--gold-core);
+    }
+
+    /* Email count highlight */
+    .email-highlight {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 13px; font-weight: 700; color: var(--gold-core);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<header class="reach-header">
+  <div class="inner">
+    <a href="index.html" class="reach-brand">
+      <img src="assets/reach-mark.png" alt="ZENTRA Reach">
+      <span>ZENTRA Reach</span>
+    </a>
+    <nav class="reach-nav">
+      <div class="nav-group">
+        <span class="nav-group-label">Core</span>
+        <a href="index.html">📊 Dashboard</a>
+        <a href="prospects.html">👥 Prospects</a>
+        <a href="campaigns.html">📧 Campaigns</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Tools</span>
+        <a href="add-prospect.html">➕ Add Prospect</a>
+        <a href="campaign-builder.html">✉️ Campaign Builder</a>
+        <a href="sources.html" class="active">🔍 Sources</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">System</span>
+        <a href="settings.html">⚙️ Settings</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- ===================== PAGE ===================== -->
+<main class="page">
+
+  <!-- Section header -->
+  <div class="section-header">
+    <h2>Discovery Sources</h2>
+    <button class="btn-gold">🔗 Add Source</button>
+  </div>
+
+  <!-- Configured Sources -->
+  <div class="sec-card">
+    <h3>Configured Sources</h3>
+
+    <!-- LinkedIn Sales Navigator -->
+    <div class="src-card" style="margin-bottom: 10px;">
+      <div class="src-info">
+        <div class="src-name">LinkedIn Sales Navigator</div>
+        <div class="src-desc">Advanced search, saved leads &amp; account lists</div>
+        <div class="src-stat" style="margin-top: 6px;">
+          <span class="sbadge sbadge-connected">● Connected</span>
+        </div>
+      </div>
+      <div class="src-right">
+        <div class="src-prospects">423 <small>prospects found</small></div>
+      </div>
+    </div>
+
+    <!-- Google Dorks Engine -->
+    <div class="src-card" style="margin-bottom: 10px;">
+      <div class="src-info">
+        <div class="src-name">Google Dorks Engine</div>
+        <div class="src-desc">Automated google dork queries for decision-maker emails</div>
+        <div class="src-stat" style="margin-top: 6px;">
+          <span class="sbadge sbadge-active">● Active</span>
+        </div>
+      </div>
+      <div class="src-right">
+        <div class="src-prospects">189 <small>prospects found</small></div>
+      </div>
+    </div>
+
+    <!-- FMM Directory -->
+    <div class="src-card" style="margin-bottom: 10px;">
+      <div class="src-info">
+        <div class="src-name">FMM Directory</div>
+        <div class="src-desc">Federation of Malaysian Manufacturers company directory</div>
+        <div class="src-stat" style="margin-top: 6px;">
+          <span class="sbadge sbadge-active">● Active</span>
+        </div>
+      </div>
+      <div class="src-right">
+        <div class="src-prospects">156 <small>prospects found</small></div>
+      </div>
+    </div>
+
+    <!-- SSM e-Info -->
+    <div class="src-card" style="margin-bottom: 10px;">
+      <div class="src-info">
+        <div class="src-name">SSM e-Info</div>
+        <div class="src-desc">Suruhanjaya Syarikat Malaysia — company registration search</div>
+        <div class="src-stat" style="margin-top: 6px;">
+          <span class="sbadge sbadge-manual">🔶 Manual Only</span>
+        </div>
+      </div>
+      <div class="src-right">
+        <div class="src-prospects">112 <small>prospects found</small></div>
+      </div>
+    </div>
+
+    <!-- MIDA MYSite Portal (dimmed) -->
+    <div class="src-card dimmed" style="margin-bottom: 10px;">
+      <div class="src-info">
+        <div class="src-name">MIDA MYSite Portal</div>
+        <div class="src-desc">Malaysian Investment Development Authority — manufacturer directory</div>
+        <div class="src-stat" style="margin-top: 6px;">
+          <span class="sbadge sbadge-nc">✕ Not Configured</span>
+        </div>
+      </div>
+      <div class="src-right">
+        <div class="src-prospects">0 <small>prospects found</small></div>
+      </div>
+    </div>
+
+    <!-- Crunchbase API (dimmed) -->
+    <div class="src-card dimmed" style="margin-bottom: 10px;">
+      <div class="src-info">
+        <div class="src-name">Crunchbase API</div>
+        <div class="src-desc">Company database — funding, leadership, market category</div>
+        <div class="src-stat" style="margin-top: 6px;">
+          <span class="sbadge sbadge-nc">✕ Not Configured</span>
+        </div>
+      </div>
+      <div class="src-right">
+        <div class="src-prospects">0 <small>prospects found</small></div>
+      </div>
+    </div>
+
+    <!-- Hunter.io -->
+    <div class="src-card">
+      <div class="src-info">
+        <div class="src-name">Hunter.io</div>
+        <div class="src-desc">Email finder &amp; verifier — domain-level email discovery</div>
+        <div class="src-stat" style="margin-top: 6px;">
+          <span class="sbadge sbadge-connected">● Connected</span>
+        </div>
+      </div>
+      <div class="src-right">
+        <div class="src-prospects">
+          <span class="email-highlight">2,341</span>
+          <small>emails found</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Source Discovery Tips -->
+  <div class="sec-card">
+    <h3>Source Discovery Tips</h3>
+    <ul class="tips-list">
+      <li><strong>Google Dorks:</strong> Use <code>site:linkedin.com/in "Manufacturing" "Malaysia"</code> combined with job title operators (<code>"Director" | "Manager" | "Head of"</code>) to surface decision-makers who may not appear in Sales Navigator.</li>
+      <li><strong>FMM Directory:</strong> The Federation of Malaysian Manufacturers lists key company contacts, including managing directors and procurement heads — cross-reference names with LinkedIn to find email patterns.</li>
+      <li><strong>Bursa Malaysia Annual Reports:</strong> Publicly listed companies disclose board members and senior leadership in their annual reports — extract names, then use Hunter.io to find corporate email formats.</li>
+      <li><strong>SSM e-Info:</strong> Company registration search reveals directors and secretaries — ideal for verifying decision-maker names before outreach. Note: requires manual lookup per company.</li>
+      <li><strong>Multi-channel verification:</strong> Always verify a prospect's email through at least two sources (e.g. Hunter.io + manual format guess + phone call) before including them in a campaign — bounce rates hurt sender reputation.</li>
+    </ul>
+  </div>
+
+</main>
+
+<script src="assets/ui.js"></script>
+</body>
+</html>

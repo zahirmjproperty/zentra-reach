@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Campaigns — ZENTRA Reach</title>
+<link rel="stylesheet" href="assets/zentra.css">
+<link rel="stylesheet" href="assets/reach.css">
+<script src="assets/theme-boot.js"></script>
+<style>
+/* ---- CSS variable fallbacks for reach.css (not defined in zentra.css) ---- */
+:root {
+  --card: var(--navy-panel, #12283f);
+  --line: var(--hairline-soft, rgba(201,162,39,0.28));
+  --radius: var(--r-md, 14px);
+  --radius-sm: 6px;
+  --ink: var(--text-primary, #ffffff);
+  --ink-2: var(--text-body, #c7d1dc);
+  --ink-3: var(--text-muted, #8c9fb4);
+  --page-bg: var(--primary, #0b1b2e);
+  --gold-core: #c9a227;
+}
+:root.theme-light {
+  --card: #ffffff;
+  --line: #e2e8f0;
+  --radius: 14px;
+  --ink: #16222f;
+  --ink-2: #3a4555;
+  --ink-3: #8c9fb4;
+  --page-bg: #f5f7f9;
+}
+html { background: var(--page-bg); }
+
+/* ---- Reach app header ---- */
+.reach-header {
+  background: rgba(7,17,32,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline-soft);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+.reach-header-inner {
+  max-width: var(--wrap, 1120px);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  min-height: 64px;
+  gap: 24px;
+}
+.reach-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+}
+.reach-brand img { width: 30px; height: 30px; }
+.reach-brand b {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--text-primary);
+}
+.reach-brand span {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.reach-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.reach-nav a {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  padding: 8px 14px;
+  border-radius: var(--r-sm, 10px);
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+.reach-nav a:hover {
+  color: var(--text-primary);
+  background: rgba(255,255,255,0.05);
+}
+.reach-nav a[aria-current="page"] {
+  color: var(--gold-core);
+  font-weight: 700;
+  background: rgba(201,162,39,0.10);
+}
+@media (max-width: 800px) {
+  .reach-nav { display: none; }
+}
+
+/* ---- Page layout ---- */
+.page-wrap {
+  max-width: var(--wrap, 1120px);
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+}
+
+/* ---- Mobile menu toggle ---- */
+.mobile-nav-toggle {
+  display: none;
+  background: none;
+  border: 1px solid var(--hairline-soft);
+  color: var(--text-body);
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 800px) {
+  .mobile-nav-toggle { display: flex; }
+}
+
+/* ---- Footer ---- */
+.reach-footer {
+  border-top: 1px solid var(--hairline-soft);
+  padding: 24px 0;
+  background: var(--navy-deep);
+}
+.reach-footer-inner {
+  max-width: var(--wrap, 1120px);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+@media (max-width: 600px) {
+  .reach-footer-inner { flex-direction: column; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<header class="reach-header">
+  <div class="reach-header-inner">
+    <a href="index.html" class="reach-brand">
+      <img src="assets/reach-mark.png" alt="ZENTRA Reach">
+      <b>ZENTRA</b> <span>Reach</span>
+    </a>
+    <nav class="reach-nav">
+      <a href="index.html">Dashboard</a>
+      <a href="prospects.html">Prospects</a>
+      <a href="campaigns.html" aria-current="page">Campaigns</a>
+      <a href="add-prospect.html">Add Prospect</a>
+      <a href="campaign-builder.html">Campaign Builder</a>
+      <a href="sources.html">Sources</a>
+      <a href="settings.html">Settings</a>
+    </nav>
+    <button class="mobile-nav-toggle" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ===== PAGE CONTENT ===== -->
+<main class="page-wrap">
+
+  <!-- Section header -->
+  <div class="section-header">
+    <h2>Email Campaigns</h2>
+    <a href="campaign-builder.html" class="btn-gold">&#x2709;&#xFE0F; New Campaign</a>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar">
+    <input type="search" placeholder="Search campaigns&hellip;">
+    <select>
+      <option>All Status</option>
+      <option>Active</option>
+      <option>Draft</option>
+      <option>Completed</option>
+      <option>Paused</option>
+    </select>
+  </div>
+
+  <!-- Campaign cards -->
+  <div class="reach-grid reach-grid-2">
+
+    <!-- Card 1 -->
+    <div class="ccard">
+      <div class="cc-title">Q4 Industrial Land Promo</div>
+      <span class="badge badge-success">Active</span>
+      <div class="cc-meta">Industrial property investors &middot; 1,248 recipients</div>
+      <div class="cc-bar"><div class="cc-bar-fill" style="width:72%"></div></div>
+      <div class="cc-stats">
+        <span>&#x2709;&#xFE0F; 899 sent</span>
+        <span>&#x1F441;&#xFE0F; 312 opened</span>
+        <span>&#x1F4AC; 48 replied</span>
+      </div>
+      <div class="cc-footer">
+        <span>Created 4 Sep 2026</span>
+        <span class="dt-actions">
+          <a href="#">Edit</a>
+          <a href="#">Duplicate</a>
+          <a href="#">Pause</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="ccard">
+      <div class="cc-title">Manufacturing Sector Outreach</div>
+      <span class="badge badge-info">Draft</span>
+      <div class="cc-meta">Manufacturing companies &middot; 876 recipients</div>
+      <div class="cc-bar"><div class="cc-bar-fill" style="width:0%"></div></div>
+      <div class="cc-stats">
+        <span>&#x2709;&#xFE0F; 0 sent</span>
+        <span>&#x1F441;&#xFE0F; 0 opened</span>
+        <span>&#x1F4AC; 0 replied</span>
+      </div>
+      <div class="cc-footer">
+        <span>Created 12 Sep 2026</span>
+        <span class="dt-actions">
+          <a href="#">Edit</a>
+          <a href="#">Duplicate</a>
+          <a href="#">Pause</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="ccard">
+      <div class="cc-title">Logistics Hub Campaign</div>
+      <span class="badge badge-success">Active</span>
+      <div class="cc-meta">Logistics &amp; warehousing &middot; 2,104 recipients</div>
+      <div class="cc-bar"><div class="cc-bar-fill" style="width:45%"></div></div>
+      <div class="cc-stats">
+        <span>&#x2709;&#xFE0F; 947 sent</span>
+        <span>&#x1F441;&#xFE0F; 203 opened</span>
+        <span>&#x1F4AC; 31 replied</span>
+      </div>
+      <div class="cc-footer">
+        <span>Created 28 Aug 2026</span>
+        <span class="dt-actions">
+          <a href="#">Edit</a>
+          <a href="#">Duplicate</a>
+          <a href="#">Pause</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="ccard">
+      <div class="cc-title">Data Centre Investor Blast</div>
+      <span class="badge badge-warning">Paused</span>
+      <div class="cc-meta">Data centre &amp; tech investors &middot; 1,675 recipients</div>
+      <div class="cc-bar"><div class="cc-bar-fill" style="width:38%"></div></div>
+      <div class="cc-stats">
+        <span>&#x2709;&#xFE0F; 636 sent</span>
+        <span>&#x1F441;&#xFE0F; 187 opened</span>
+        <span>&#x1F4AC; 22 replied</span>
+      </div>
+      <div class="cc-footer">
+        <span>Created 19 Aug 2026</span>
+        <span class="dt-actions">
+          <a href="#">Edit</a>
+          <a href="#">Duplicate</a>
+          <a href="#">Resume</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="ccard">
+      <div class="cc-title">F&amp;B Expansion Leads</div>
+      <span class="badge badge-danger">Completed</span>
+      <div class="cc-meta">F&amp;B franchisees &amp; operators &middot; 534 recipients</div>
+      <div class="cc-bar"><div class="cc-bar-fill" style="width:100%"></div></div>
+      <div class="cc-stats">
+        <span>&#x2709;&#xFE0F; 534 sent</span>
+        <span>&#x1F441;&#xFE0F; 298 opened</span>
+        <span>&#x1F4AC; 67 replied</span>
+      </div>
+      <div class="cc-footer">
+        <span>Created 1 Aug 2026</span>
+        <span class="dt-actions">
+          <a href="#">View</a>
+          <a href="#">Duplicate</a>
+          <a href="#">Archive</a>
+        </span>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="ccard">
+      <div class="cc-title">Year-End Commercial Mix</div>
+      <span class="badge badge-info">Draft</span>
+      <div class="cc-meta">Commercial property buyers &middot; 2,430 recipients</div>
+      <div class="cc-bar"><div class="cc-bar-fill" style="width:0%"></div></div>
+      <div class="cc-stats">
+        <span>&#x2709;&#xFE0F; 0 sent</span>
+        <span>&#x1F441;&#xFE0F; 0 opened</span>
+        <span>&#x1F4AC; 0 replied</span>
+      </div>
+      <div class="cc-footer">
+        <span>Created 22 Sep 2026</span>
+        <span class="dt-actions">
+          <a href="#">Edit</a>
+          <a href="#">Duplicate</a>
+          <a href="#">Pause</a>
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="reach-footer">
+  <div class="reach-footer-inner">
+    <span>&copy; 2026 ZENTRA Reach &mdash; B2B CRM for Real Estate</span>
+    <span class="micro">Prototype &middot; sample data</span>
+  </div>
+</footer>
+
+<script src="assets/ui.js"></script>
+</body>
+</html>

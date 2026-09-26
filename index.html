@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZENTRA Reach — Dashboard</title>
+  <link rel="stylesheet" href="assets/zentra.css">
+  <link rel="stylesheet" href="assets/reach.css">
+  <script src="assets/theme-boot.js"></script>
+  <style>
+    /* ZENTRA Reach dashboard overrides */
+    #app {
+      display: flex;
+      min-height: 100vh;
+    }
+    #sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      background: var(--navy-deep, #071120);
+      border-right: 1px solid var(--hairline-soft, rgba(201,162,39,0.28));
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    #sidebar .side-inner {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    #content {
+      flex: 1;
+      min-width: 0;
+      padding: 32px;
+      max-width: 1120px;
+    }
+    .page {
+      animation: fadeIn 0.3s ease;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; translate: 0 8px; }
+      to   { opacity: 1; translate: 0 0; }
+    }
+    #sidebar .brand {
+      padding: 20px 16px 16px;
+      border-bottom: 1px solid var(--hairline-soft, rgba(201,162,39,0.28));
+    }
+    #sidebar .brand .mark img {
+      width: 32px;
+      height: auto;
+    }
+    #sidebar .brand b {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary, #fff);
+      letter-spacing: 0.06em;
+    }
+    #sidebar .brand small {
+      display: block;
+      font-size: 10px;
+      color: var(--text-muted, #8c9fb4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+    #sidebar .brand .mark {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+    .sidebar-nav {
+      flex: 1;
+      padding: 12px 0;
+    }
+    .sidebar-nav .sec {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted, #8c9fb4);
+      padding: 16px 16px 6px;
+    }
+    .sidebar-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-body, #c7d1dc);
+      text-decoration: none;
+      transition: all 0.15s;
+      border-left: 2px solid transparent;
+    }
+    .sidebar-nav a:hover {
+      background: rgba(201,162,39,0.06);
+      color: var(--text-primary, #fff);
+    }
+    .sidebar-nav a.on {
+      color: var(--gold-core, #c9a227);
+      background: rgba(201,162,39,0.08);
+      border-left-color: var(--gold-core, #c9a227);
+      font-weight: 600;
+    }
+    .sidebar-nav a .ic {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    #sidebar .foot {
+      padding: 12px 16px;
+      font-size: 10px;
+      color: var(--text-muted, #8c9fb4);
+      border-top: 1px solid var(--hairline-soft, rgba(201,162,39,0.28));
+      text-align: center;
+      line-height: 1.5;
+    }
+    .source-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .source-bar-fill {
+      height: 8px;
+      border-radius: 4px;
+      background: linear-gradient(90deg, #c9a227, #e8ce86);
+      transition: width 0.5s;
+      flex-shrink: 0;
+    }
+    .source-bar-track {
+      flex: 1;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--line, rgba(201,162,39,0.15));
+    }
+    .source-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line, rgba(201,162,39,0.15));
+    }
+    .source-item:last-child {
+      border-bottom: none;
+    }
+    .source-name {
+      width: 140px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink, var(--text-body));
+      flex-shrink: 0;
+    }
+    .source-count {
+      width: 40px;
+      text-align: right;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gold-core, #c9a227);
+      flex-shrink: 0;
+    }
+    #sidebar .burger {
+      display: none;
+    }
+    @media(max-width: 768px) {
+      #sidebar {
+        position: fixed;
+        z-index: 100;
+        left: -280px;
+        transition: left 0.3s;
+        height: 100vh;
+      }
+      #sidebar.open {
+        left: 0;
+      }
+      #sidebar .burger {
+        display: flex;
+        position: fixed;
+        top: 12px;
+        left: 12px;
+        z-index: 101;
+        background: var(--navy-panel, #12283f);
+        border: 1px solid var(--hairline-soft, rgba(201,162,39,0.28));
+        border-radius: 8px;
+        padding: 8px;
+        color: var(--gold-core, #c9a227);
+        cursor: pointer;
+      }
+      #content {
+        padding: 20px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <nav id="sidebar">
+      <div class="side-inner">
+        <!-- Brand -->
+        <div class="brand">
+          <div class="mark">
+            <img src="assets/reach-mark.png" alt="ZENTRA Reach" width="32" height="auto">
+          </div>
+          <div>
+            <b>ZENTRA Reach</b>
+            <small>Prospect Discovery &amp; CRM</small>
+          </div>
+        </div>
+        <!-- Navigation JS target -->
+        <div id="znav" class="sidebar-nav"></div>
+        <!-- Footer -->
+        <div class="foot">
+          ZENTRA Reach &middot; Commercial &amp; Industrial<br>
+          Prospect CRM &copy; 2026
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="content">
+      <div class="page">
+
+        <!-- Section header -->
+        <div class="section-header">
+          <h2>Dashboard</h2>
+          <span class="muted" style="font-size:13px;" id="dashboardDate"></span>
+        </div>
+
+        <!-- KPI Grid -->
+        <div class="reach-grid reach-grid-4" style="margin-bottom:20px;">
+          <div class="rkpi">
+            <span class="rkpi-label">&#128101; Total Prospects</span>
+            <span class="rkpi-val">1,247</span>
+            <span class="rkpi-trend" style="color:var(--green,#10b981);">&#9650; +38 this week</span>
+          </div>
+          <div class="rkpi">
+            <span class="rkpi-label">&#128231; Active Campaigns</span>
+            <span class="rkpi-val">6</span>
+            <span class="rkpi-trend" style="color:var(--amber,#f59e0b);">&#9654; 2 in draft</span>
+          </div>
+          <div class="rkpi">
+            <span class="rkpi-label">&#128200; Open Rate</span>
+            <span class="rkpi-val">34.2%</span>
+            <span class="rkpi-trend" style="color:var(--green,#10b981);">&#9650; +2.1% vs last month</span>
+          </div>
+          <div class="rkpi">
+            <span class="rkpi-label">&#128197; Meetings Booked</span>
+            <span class="rkpi-val">18</span>
+            <span class="rkpi-trend" style="color:var(--text-muted,#8c9fb4);">this month &middot; 4 upcoming</span>
+          </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="sec-card">
+          <h3>Recent Activity</h3>
+          <ul class="act-list">
+            <li class="act-item">
+              <span class="act-dot gold"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>New prospect added</strong> — Tan Sri Ahmad Razali, IOI Properties Group (CEO)</div>
+                <div class="act-meta">2 minutes ago &middot; Source: LinkedIn</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot blue"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>Email sent</strong> — Cold outreach to 45 C-suite contacts at Gamuda Land</div>
+                <div class="act-meta">18 minutes ago &middot; Campaign: &#8220;Q4 Industrial Land Opportunity&#8221;</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot green"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>Meeting booked</strong> — Dato&#8217; Seri Lim with Ahmad Fairuz (Sunway Construction)</div>
+                <div class="act-meta">1 hour ago &middot; Thu 10:30 AM</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot gold"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>New prospect added</strong> — Dr. Noraini Hashim, UEM Sunrise (Head of Commercial)</div>
+                <div class="act-meta">2 hours ago &middot; Source: FMM Directory</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot purple"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>Campaign launched</strong> — &#8220;Selangor Industrial Park Series&#8221; to 320 contacts</div>
+                <div class="act-meta">4 hours ago &middot; 3 sequences, automated</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot blue"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>Email opened</strong> — Dato&#8217; Lee Eng Guan opened &#8220;Penang Port Land Parcels&#8221;</div>
+                <div class="act-meta">5 hours ago &middot; Follow-up scheduled in 3 days</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot green"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>Meeting completed</strong> — Site visit with Mah Sing Properties at Bukit Jalil</div>
+                <div class="act-meta">Yesterday at 3:30 PM &middot; Follow-up email sent</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot gold"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>New prospect added</strong> — Christopher Wong, Eco World International (GM Land)</div>
+                <div class="act-meta">Yesterday at 2:15 PM &middot; Source: SSM e-Info</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot red"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>Bounced email</strong> — 3 addresses in campaign &#8220;Johor Logistics Hub&#8221; invalid</div>
+                <div class="act-meta">Yesterday at 1:00 PM &middot; Removed from list</div>
+              </div>
+            </li>
+            <li class="act-item">
+              <span class="act-dot blue"></span>
+              <div class="act-body">
+                <div class="act-text"><strong>Reply received</strong> — Datin Seri Khoo replied: &#8220;Let&#8217;s discuss next week&#8221;</div>
+                <div class="act-meta">Yesterday at 11:42 AM &middot; Tagged as &#8220;Warm&#8221;</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Bottom Grid: Campaigns + Sources -->
+        <div class="reach-grid reach-grid-2">
+
+          <!-- Top Performing Campaigns -->
+          <div class="sec-card">
+            <h3>Top Performing Campaigns</h3>
+            <div style="display:flex;flex-direction:column;gap:14px;">
+              <div class="ccard">
+                <div class="cc-title">Selangor Industrial Park Series</div>
+                <div class="cc-meta">Launched 12 Oct &middot; 320 recipients</div>
+                <div class="cc-bar">
+                  <div class="cc-bar-fill" style="width:68%;"></div>
+                </div>
+                <div class="cc-stats">
+                  <span>&#128231; 218 sent</span>
+                  <span>&#128065; 87 opened (39.9%)</span>
+                  <span>&#128260; 14 replied (6.4%)</span>
+                </div>
+                <div class="cc-footer">
+                  <span>Conversion: 2.8%</span>
+                  <span style="color:var(--green,#10b981);">&#9650; +12% vs avg</span>
+                </div>
+              </div>
+
+              <div class="ccard">
+                <div class="cc-title">Johor Logistics Hub</div>
+                <div class="cc-meta">Launched 5 Oct &middot; 185 recipients</div>
+                <div class="cc-bar">
+                  <div class="cc-bar-fill" style="width:54%;"></div>
+                </div>
+                <div class="cc-stats">
+                  <span>&#128231; 175 sent</span>
+                  <span>&#128065; 62 opened (35.4%)</span>
+                  <span>&#128260; 9 replied (5.1%)</span>
+                </div>
+                <div class="cc-footer">
+                  <span>Conversion: 1.6%</span>
+                  <span style="color:var(--text-muted,#8c9fb4);">&#9644; On track</span>
+                </div>
+              </div>
+
+              <div class="ccard">
+                <div class="cc-title">Penang Port Land Parcels</div>
+                <div class="cc-meta">Launched 28 Sep &middot; 140 recipients</div>
+                <div class="cc-bar">
+                  <div class="cc-bar-fill" style="width:42%;"></div>
+                </div>
+                <div class="cc-stats">
+                  <span>&#128231; 140 sent</span>
+                  <span>&#128065; 48 opened (34.3%)</span>
+                  <span>&#128260; 5 replied (3.6%)</span>
+                </div>
+                <div class="cc-footer">
+                  <span>Conversion: 2.1%</span>
+                  <span style="color:var(--amber,#f59e0b);">&#9654; Warm leads</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prospect Source Breakdown -->
+          <div class="sec-card">
+            <h3>Prospect Source Breakdown</h3>
+            <div style="margin-bottom:16px;">
+              <div class="source-item">
+                <span class="source-name">LinkedIn</span>
+                <div class="source-bar-track">
+                  <div class="source-bar-fill" style="width:100%;"></div>
+                </div>
+                <span class="source-count">423</span>
+              </div>
+              <div class="source-item">
+                <span class="source-name">Google Dorks</span>
+                <div class="source-bar-track">
+                  <div class="source-bar-fill" style="width:45%;"></div>
+                </div>
+                <span class="source-count">189</span>
+              </div>
+              <div class="source-item">
+                <span class="source-name">FMM Directory</span>
+                <div class="source-bar-track">
+                  <div class="source-bar-fill" style="width:37%;"></div>
+                </div>
+                <span class="source-count">156</span>
+              </div>
+              <div class="source-item">
+                <span class="source-name">SSM e-Info</span>
+                <div class="source-bar-track">
+                  <div class="source-bar-fill" style="width:26%;"></div>
+                </div>
+                <span class="source-count">112</span>
+              </div>
+              <div class="source-item">
+                <span class="source-name">Referral</span>
+                <div class="source-bar-track">
+                  <div class="source-bar-fill" style="width:21%;"></div>
+                </div>
+                <span class="source-count">87</span>
+              </div>
+              <div class="source-item">
+                <span class="source-name">Events</span>
+                <div class="source-bar-track">
+                  <div class="source-bar-fill" style="width:13%;"></div>
+                </div>
+                <span class="source-count">56</span>
+              </div>
+              <div class="source-item">
+                <span class="source-name">Other</span>
+                <div class="source-bar-track">
+                  <div class="source-bar-fill" style="width:53%;"></div>
+                </div>
+                <span class="source-count">224</span>
+              </div>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line,rgba(201,162,39,0.15));padding-top:12px;">
+              <span style="font-size:12px;color:var(--ink-3,var(--text-muted));">Total prospects tracked</span>
+              <span style="font-size:20px;font-weight:700;background:linear-gradient(135deg,#e8ce86,#c9a227,#9a7a2e);-webkit-background-clip:text;background-clip:text;color:transparent;">1,247</span>
+            </div>
+          </div>
+
+        </div><!-- /reach-grid-2 -->
+
+      </div><!-- /page -->
+    </main>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Set today's date
+      var now = new Date();
+      var opts = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('dashboardDate').textContent = now.toLocaleDateString('en-MY', opts);
+    });
+  </script>
+  <script src="assets/nav.js"></script>
+  <script src="assets/ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<title>ZENTRA Reach — Settings</title>
+<script src="assets/theme-boot.js"></script>
+<link rel="stylesheet" href="assets/zentra.css">
+<link rel="stylesheet" href="assets/reach.css">
+</head>
+<body>
+<div id="app">
+<nav id="sidebar"></nav>
+<main id="content">
+<div class="page">
+<div class="section-header"><h2>Settings</h2></div>
+
+<div class="sec-card">
+<h3>Profile</h3>
+<div class="form-grid">
+<div class="fg"><label>Agent Name</label><input type="text" value="Zahiruddin Bin Mat Jailaini"></div>
+<div class="fg"><label>REN Number</label><input type="text" value="PEA 2684"></div>
+<div class="fg"><label>Email</label><input type="email" value="zahir@zahirproperty.my"></div>
+<div class="fg"><label>Phone</label><input type="tel" value="+6012-231-0119"></div>
+<div class="fg"><label>Agency</label><input type="text" value="ZMJ Solutions / IQI Realty"></div>
+<div class="fg"><label>Brand</label><input type="text" value="Mr Tanah / Zahir MJ Property"></div>
+</div>
+</div>
+
+<div class="sec-card">
+<h3>Integrations</h3>
+<div class="src-card">
+<div class="src-info">
+<div class="src-name">🔗 LinkedIn Sales Navigator</div>
+<div class="src-desc">Connect your Sales Navigator account for automated prospect discovery</div>
+<div class="src-stat">Connected as Zahir MJ</div>
+</div>
+<button class="btn-ghost btn-sm">Reconnect</button>
+</div>
+<div class="src-card">
+<div class="src-info">
+<div class="src-name">📧 Email Sending (SMTP / API)</div>
+<div class="src-desc">Configure your sending domain and email provider for campaign delivery</div>
+<div class="src-stat">Using SendGrid — 4,500 emails remaining this month</div>
+</div>
+<button class="btn-ghost btn-sm">Configure</button>
+</div>
+<div class="src-card">
+<div class="src-info">
+<div class="src-name">🗄️ CRM Sync</div>
+<div class="src-desc">Sync prospects to your existing CRM or Google Sheets</div>
+<div class="src-stat">Google Sheets connected: Prospects Master List</div>
+</div>
+<button class="btn-ghost btn-sm">Sync Now</button>
+</div>
+<div class="src-card">
+<div class="src-info">
+<div class="src-name">🔍 Hunter.io</div>
+<div class="src-desc">Email finder API for discovering company email addresses</div>
+<div class="src-stat">25/25 free searches used this month</div>
+</div>
+<button class="btn-ghost btn-sm">Upgrade</button>
+</div>
+</div>
+
+<div class="sec-card">
+<h3>PDPA Compliance</h3>
+<div class="form-grid">
+<div class="fg"><label>Opt-Out Message</label><textarea rows="2">*If this information is not relevant at this time, please let me know and I will not contact you again.*</textarea></div>
+<div class="fg"><label>Data Retention Period</label><select><option>30 days after last contact</option><option selected>90 days after last contact</option><option>12 months after last contact</option></select></div>
+<div class="fg"><label>Auto-Delete Inactive</label><select><option>Yes</option><option selected>No — manual only</option></select></div>
+<div class="fg"><label>Include REN in emails</label><select><option selected>Yes</option><option>No</option></select></div>
+</div>
+<div class="hint">Your outreach emails will automatically include: agent name, REN number, agency, and opt-out clause as required by PDPA Malaysia.</div>
+</div>
+
+<div class="sec-card">
+<h3>Email Templates</h3>
+<div style="display:grid;gap:8px;">
+<div class="cstep"><div class="cstep-title">📧 Email 1 — Introduction</div><div class="cstep-body">Subject: [Property Type] at [Location] — Suitable for [Industry]<br>Salam [Name], I'm [Agent], a commercial real estate agent at [Agency]. I work with companies in [industry] who are evaluating their space needs...</div></div>
+<div class="cstep"><div class="cstep-title">📧 Email 2 — Follow-up (5-7 days)</div><div class="cstep-body">Subject: RE: [Property Type] at [Location]<br>Quick follow-up. Size: [size] sqft, Location: [location], Price: [RM], Key features: [features]...</div></div>
+<div class="cstep"><div class="cstep-title">📧 Email 3 — Final Follow-up</div><div class="cstep-body">Subject: Last chance — [Property Type] at [Location]<br>This is my last email on this opportunity. If space needs arise in future, feel free to reach out...</div></div>
+</div>
+<div style="margin-top:12px;display:flex;gap:8px;">
+<button class="btn-ghost btn-sm">✏️ Edit Templates</button>
+<button class="btn-gold btn-sm">💾 Save as Default</button>
+</div>
+</div>
+
+<div class="form-actions">
+<button class="btn-ghost">Reset to Defaults</button>
+<button class="btn-gold">💾 Save All Settings</button>
+</div>
+
+</div>
+</main>
+</div>
+<script src="assets/reach-data.js"></script>
+<script src="assets/nav.js"></script>
+<script src="assets/ui.js"></script>
+</body>
+</html>

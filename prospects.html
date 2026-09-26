@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prospects — ZENTRA Reach</title>
+<meta name="description" content="ZENTRA Reach — B2B prospect discovery &amp; CRM for commercial/industrial real estate agents.">
+<script src="assets/theme-boot.js"></script>
+<link rel="stylesheet" href="assets/zentra.css">
+<link rel="stylesheet" href="assets/reach.css">
+<style>
+/* ---- ZENTRA Reach page-level overrides ---- */
+body { background: var(--primary); }
+.main { padding: 32px 0; }
+
+/* NAV overrides for ZENTRA Reach brand */
+#znav .brand .mark img { content: url('assets/reach-mark.png'); }
+#znav .brand b { font-size: 13px; font-weight: 800; letter-spacing: 0.14em; }
+#znav .brand small { color: var(--gold-core); font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; display: block; }
+#znav .sec { display: none; }
+
+/* Sidebar / topbar nav — ZENTRA Reach friendly */
+@media(min-width:721px){
+  #znav { display: flex; align-items: center; gap: 12px; background: rgba(7,17,32,0.82); backdrop-filter: blur(14px); border-bottom: 1px solid var(--hairline-soft); padding: 0 24px; min-height: 64px; }
+  #znav .brand { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+  #znav .brand .mark { width: 34px; height: 34px; }
+  #znav .nav { display: flex; gap: 20px; }
+  #znav .nav a { font-size: 13px; font-weight: 500; color: var(--text-muted); padding: 6px 0; position: relative; text-decoration: none; transition: color 0.18s; display: inline-flex; align-items: center; gap: 5px; }
+  #znav .nav a:hover { color: var(--text-primary); }
+  #znav .nav a.on { color: var(--gold-core); font-weight: 700; }
+  #znav .nav a.on::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 1px; background: var(--grad-gold); }
+  #znav .nav .ic { width: 16px; height: 16px; flex: 0 0 auto; }
+  #znav .foot { display: none; }
+}
+@media(max-width:720px){
+  #znav { display: none; }
+}
+
+/* ----- Page-specific --------------------------------------------------- */
+.page-title-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.page-title-area h1 {
+  font-size: clamp(23px, 2.6vw, 30px);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.page-title-area .subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* KPI mini-row */
+.kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+@media(max-width:700px){ .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:400px){ .kpi-row { grid-template-columns: 1fr; } }
+.kpi-mini {
+  background: var(--navy-panel);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-md, 14px);
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+}
+.kpi-mini .km-val {
+  font-size: 22px;
+  font-weight: 800;
+  background: var(--grad-gold);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1.1;
+}
+.kpi-mini .km-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+.kpi-mini .km-trend {
+  font-size: 11px;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.kpi-mini .km-trend.up { color: var(--success, #43b02a); }
+.kpi-mini .km-trend.down { color: var(--danger, #e8776a); }
+
+/* Prospect cards */
+.reach-grid { display: grid; gap: 14px; }
+.reach-grid-3 { grid-template-columns: repeat(3, 1fr); }
+@media(max-width:900px){ .reach-grid-3 { grid-template-columns: repeat(2, 1fr); } }
+@media(max-width:600px){ .reach-grid-3 { grid-template-columns: 1fr; } }
+
+.pcard {
+  background: var(--navy-panel);
+  border: 1px solid var(--hairline-soft);
+  border-radius: var(--r-md, 14px);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.pcard:hover {
+  box-shadow: var(--glow-gold);
+  translate: 0 -2px;
+  border-color: var(--hairline);
+}
+.pcard .pc-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.pcard .pc-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--text-primary);
+}
+.pcard .pc-title {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+.pcard .pc-company {
+  font-size: 12px;
+  color: var(--text-body);
+  margin-top: 1px;
+}
+.pcard .pc-badges { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 2px; }
+.pcard .pc-contact { display: flex; gap: 8px; font-size: 12px; color: var(--text-muted); flex-wrap: wrap; }
+.pcard .pc-contact a { color: var(--gold-core); text-decoration: none; }
+.pcard .pc-contact a:hover { text-decoration: underline; }
+.pcard .pc-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--hairline-soft);
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.badge-new { background: rgba(67,176,42,0.12); color: #43b02a; }
+.badge-warm { background: rgba(217,138,31,0.12); color: #d98a1f; }
+.badge-cold { background: rgba(232,119,106,0.12); color: #e8776a; }
+.badge-contacted { background: rgba(0,163,181,0.12); color: #00a3b5; }
+.badge-meeting { background: rgba(139,92,246,0.12); color: #8b5cf6; }
+
+/* Source & Industry tags */
+.tag-source, .tag-industry {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+}
+.tag-source { background: rgba(201,162,39,0.08); color: var(--gold-light, #e8ce86); border: 1px solid rgba(201,162,39,0.18); }
+.tag-industry { background: rgba(255,255,255,0.04); color: var(--text-body); border: 1px solid var(--hairline-soft); }
+</style>
+</head>
+<body>
+
+<!-- ===== SITE HEADER ===== -->
+<div id="znav">
+  <div class="brand">
+    <div class="mark"><img src="assets/reach-mark.png" alt="ZENTRA Reach" width="34" height="34"></div>
+    <div>
+      <b>ZENTRA Reach</b>
+      <small>Prospect CRM</small>
+    </div>
+  </div>
+  <nav class="nav">
+    <a href="index.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg><span>Dashboard</span></a>
+    <a href="prospects.html" class="on"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Prospects</span></a>
+    <a href="campaigns.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg><span>Campaigns</span></a>
+    <a href="sources.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="4" cy="4" r="2"/><circle cx="12" cy="4" r="2"/><circle cx="20" cy="4" r="2"/><circle cx="4" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="20" cy="12" r="2"/><circle cx="4" cy="20" r="2"/><circle cx="12" cy="20" r="2"/><circle cx="20" cy="20" r="2"/></svg><span>Sources</span></a>
+    <a href="settings.html"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg><span>Settings</span></a>
+  </nav>
+</div>
+
+<main class="main">
+<div class="wrap">
+
+  <!-- ===== PAGE HEADER ===== -->
+  <div class="page-title-area">
+    <div>
+      <h1>Prospects</h1>
+      <div class="subtitle">Manage and track your commercial &amp; industrial real estate prospects</div>
+    </div>
+    <a href="add-prospect.html" class="btn-gold">➕ Add Prospect</a>
+  </div>
+
+  <!-- ===== KPI MINI ROW ===== -->
+  <div class="kpi-row">
+    <div class="kpi-mini">
+      <span class="km-val">846</span>
+      <span class="km-label">Total Prospects</span>
+      <span class="km-trend up">↑ 12% this month</span>
+    </div>
+    <div class="kpi-mini">
+      <span class="km-val">43</span>
+      <span class="km-label">New This Week</span>
+      <span class="km-trend up">↑ +8 vs last week</span>
+    </div>
+    <div class="kpi-mini">
+      <span class="km-val">18</span>
+      <span class="km-label">Meetings Scheduled</span>
+      <span class="km-trend up">↑ +3</span>
+    </div>
+    <div class="kpi-mini">
+      <span class="km-val">39%</span>
+      <span class="km-label">Contact Rate</span>
+      <span class="km-trend down">↓ 2pp vs Q3</span>
+    </div>
+  </div>
+
+  <!-- ===== FILTER BAR ===== -->
+  <div class="filter-bar">
+    <input type="search" placeholder="Search by name, company, industry&hellip;">
+    <select>
+      <option>All Industries</option>
+      <option>Manufacturing</option>
+      <option>Logistics</option>
+      <option>F&amp;B</option>
+      <option>Retail</option>
+      <option>Tech</option>
+      <option>Healthcare</option>
+    </select>
+    <select>
+      <option>All Status</option>
+      <option>New</option>
+      <option>Warm</option>
+      <option>Cold</option>
+      <option>Contacted</option>
+      <option>Meeting</option>
+    </select>
+    <select>
+      <option>All Source</option>
+      <option>LinkedIn</option>
+      <option>Google Dorks</option>
+      <option>FMM</option>
+      <option>SSM</option>
+      <option>Referral</option>
+      <option>Events</option>
+    </select>
+  </div>
+
+  <!-- ===== FILTER PILLS ===== -->
+  <div class="filter-pills" style="margin-bottom:16px;">
+    <span class="pill active">All</span>
+    <span class="pill">Manufacturing <small style="opacity:0.6;">143</small></span>
+    <span class="pill">Logistics <small style="opacity:0.6;">89</small></span>
+    <span class="pill">F&amp;B <small style="opacity:0.6;">67</small></span>
+    <span class="pill">Tech <small style="opacity:0.6;">245</small></span>
+    <span class="pill">Healthcare <small style="opacity:0.6;">56</small></span>
+  </div>
+
+  <!-- ===== PROSPECT GRID ===== -->
+  <div class="reach-grid reach-grid-3">
+
+    <!-- 1 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Ahmad Faizal Ramli</span>
+        <span class="badge badge-new">New</span>
+      </div>
+      <div class="pc-title">Logistics Manager</div>
+      <div class="pc-company">MMC Logistics Sdn Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">LinkedIn</span>
+        <span class="tag-industry">Logistics</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:ahmad.faizal@mmc-logistics.my">✉ ahmad.faizal@mmc-logistics.my</a>
+        <a href="tel:+60123345678">☏ +60 12-334 5678</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: —</span>
+        <span>Follow-up: 15 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Siti Nurhaliza Abdullah</span>
+        <span class="badge badge-warm">Warm</span>
+      </div>
+      <div class="pc-title">Supply Chain Director</div>
+      <div class="pc-company">Top Glove Corporation Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">FMM Directory</span>
+        <span class="tag-industry">Manufacturing</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:siti.nurhaliza@topglove.com">✉ siti.nurhaliza@topglove.com</a>
+        <a href="tel:+60193221144">☏ +60 19-322 1144</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 2 Jan 2027</span>
+        <span>Follow-up: 14 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Tan Wei Ming</span>
+        <span class="badge badge-contacted">Contacted</span>
+      </div>
+      <div class="pc-title">Operations Director</div>
+      <div class="pc-company">Padiberas Nasional Bhd (Bernas)</div>
+      <div class="pc-badges">
+        <span class="tag-source">SSM</span>
+        <span class="tag-industry">F&amp;B</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:tan.wm@bernas.com.my">✉ tan.wm@bernas.com.my</a>
+        <a href="tel:+60355216888">☏ +60 3-5521 6888</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 8 Jan 2027</span>
+        <span>Follow-up: 20 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Rajesh Muthusamy</span>
+        <span class="badge badge-cold">Cold</span>
+      </div>
+      <div class="pc-title">Plant Manager</div>
+      <div class="pc-company">Nestlé Manufacturing (M) Sdn Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">Google Dorks</span>
+        <span class="tag-industry">F&amp;B</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:rajesh.m@my.nestle.com">✉ rajesh.m@my.nestle.com</a>
+        <a href="tel:+60377327744">☏ +60 3-7732 7744</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 10 Dec 2026</span>
+        <span>Follow-up: 28 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Lee Choon Heng</span>
+        <span class="badge badge-meeting">Meeting</span>
+      </div>
+      <div class="pc-title">Chief Executive Officer</div>
+      <div class="pc-company">MyEG Services Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">LinkedIn</span>
+        <span class="tag-industry">Tech</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:choonheng.lee@myeg.com.my">✉ choonheng.lee@myeg.com.my</a>
+        <a href="tel:+60376501555">☏ +60 3-7650 1555</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 5 Jan 2027</span>
+        <span>Follow-up: Meeting 22 Jan</span>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Kavita Sivanathan</span>
+        <span class="badge badge-new">New</span>
+      </div>
+      <div class="pc-title">Head of Real Estate</div>
+      <div class="pc-company">IHH Healthcare Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">Referral</span>
+        <span class="tag-industry">Healthcare</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:kavita.s@ihh.com.my">✉ kavita.s@ihh.com.my</a>
+        <a href="tel:+60327828555">☏ +60 3-2782 8555</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: —</span>
+        <span>Follow-up: 18 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Mohd Hafiz Zakaria</span>
+        <span class="badge badge-warm">Warm</span>
+      </div>
+      <div class="pc-title">Logistics Director</div>
+      <div class="pc-company">Pos Malaysia Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">LinkedIn</span>
+        <span class="tag-industry">Logistics</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:hafiz.zakaria@pos.com.my">✉ hafiz.zakaria@pos.com.my</a>
+        <a href="tel:+60327228800">☏ +60 3-2722 8800</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 3 Jan 2027</span>
+        <span>Follow-up: 16 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Lim Siew Ling</span>
+        <span class="badge badge-contacted">Contacted</span>
+      </div>
+      <div class="pc-title">Procurement Manager</div>
+      <div class="pc-company">Top Glove Corporation Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">FMM Directory</span>
+        <span class="tag-industry">Manufacturing</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:siewling.lim@topglove.com">✉ siewling.lim@topglove.com</a>
+        <a href="tel:+60333628000">☏ +60 3-3362 8000</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 6 Jan 2027</span>
+        <span>Follow-up: 19 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Vignesh Ramesh</span>
+        <span class="badge badge-new">New</span>
+      </div>
+      <div class="pc-title">Regional Operations Manager</div>
+      <div class="pc-company">DKSH Malaysia Sdn Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">SSM</span>
+        <span class="tag-industry">Logistics</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:vignesh.ramesh@dksh.com">✉ vignesh.ramesh@dksh.com</a>
+        <a href="tel:+60378823344">☏ +60 3-7882 3344</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: —</span>
+        <span>Follow-up: 21 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Sarah Kamaruddin</span>
+        <span class="badge badge-cold">Cold</span>
+      </div>
+      <div class="pc-title">HR &amp; Admin Director</div>
+      <div class="pc-company">AEON Co (M) Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">Events</span>
+        <span class="tag-industry">Retail</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:sarah.k@aeon.com.my">✉ sarah.k@aeon.com.my</a>
+        <a href="tel:+60355698888">☏ +60 3-5569 8888</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 15 Nov 2026</span>
+        <span>Follow-up: 30 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Jason Koh Beng Seng</span>
+        <span class="badge badge-warm">Warm</span>
+      </div>
+      <div class="pc-title">Head of IT Infrastructure</div>
+      <div class="pc-company">Malayan Banking Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">LinkedIn</span>
+        <span class="tag-industry">Tech</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:jason.koh@maybank.com.my">✉ jason.koh@maybank.com.my</a>
+        <a href="tel:+60320708833">☏ +60 3-2070 8833</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 4 Jan 2027</span>
+        <span>Follow-up: 23 Jan 2027</span>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="pcard">
+      <div class="pc-top">
+        <span class="pc-name">Norazlina Mohd Yusof</span>
+        <span class="badge badge-contacted">Contacted</span>
+      </div>
+      <div class="pc-title">Facilities Manager</div>
+      <div class="pc-company">KPJ Healthcare Bhd</div>
+      <div class="pc-badges">
+        <span class="tag-source">Referral</span>
+        <span class="tag-industry">Healthcare</span>
+      </div>
+      <div class="pc-contact">
+        <a href="mailto:norazlina@kpjhealth.com.my">✉ norazlina@kpjhealth.com.my</a>
+        <a href="tel:+60377136666">☏ +60 3-7713 6666</a>
+      </div>
+      <div class="pc-meta">
+        <span>Last contacted: 7 Jan 2027</span>
+        <span>Follow-up: 17 Jan 2027</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ===== PAGINATION ===== -->
+  <div class="pagination">
+    <a href="#">‹</a>
+    <a href="#" class="active">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#">4</a>
+    <a href="#">5</a>
+    <a href="#">…</a>
+    <a href="#">12</a>
+    <a href="#">›</a>
+  </div>
+
+</div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="inner">
+      <span class="brand-text"><b>ZENTRA Reach</b></span>
+      <span class="micro">&copy; 2027 — Prospect CRM for commercial &amp; industrial real estate</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/ui.js"></script>
+</body>
+</html>
