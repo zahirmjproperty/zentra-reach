@@ -2,7 +2,7 @@
 const ZR = window.ZR || {};
 
 ZR.DISCOVERY_DATE = "2026-09-26";
-ZR.DISCOVERY_SOURCES = ["Google Dorks", "The Edge Malaysia", "The Star", "MIDA media release", "LinkedIn", "Company website", "Cleanroom Technology", "Media OutReach Newswire"];
+ZR.DISCOVERY_SOURCES = ["Google Dorks", "The Edge Malaysia", "The Star", "MIDA", "LinkedIn", "Company website", "Cleanroom Technology", "Media OutReach", "Reuters", "PRNewswire", "Mingtiandi", "Business Today", "w.media", "Airtrunk", "ESR", "Empyrion Digital"];
 
 // === HOT LEADS (Priority 1) ===
 ZR.HOT_LEADS = [
@@ -40,10 +40,20 @@ ZR.HOT_LEADS = [
     signal: "New Group MD (June 2026). MVV City GDV RM15B over 12yrs. Record sales RM1.51B FY26. Heavy industrial land sales.",
     source: "The Star May 2026", status: "new", lastContact: "—", nextFollowUp: "2026-10-01",
     notes: "Developer of MVV City in NS. Could be partner or competitor. Worth connecting for industrial land development synergy."},
+
+  // ===== BATCH 2: Logistics & DC leads (26 Sep 2026) =====
+  {id:"H06",name:"Farian Kirana",title:"CEO",company:"Lion Parcel (Lion Group)",industry:"Logistics / E-commerce",email:"",phone:"",linkedin:"",location:"Subang Jaya / KLIA",signal_type:"JUST LAUNCHED IN MALAYSIA",priority:"HIGHEST",signal:"Opened first intl office in Subang Jaya (24 Sep 2026!). CTO at KLIA. Plans MY as regional hub for SEA.",source:"PRNewswire 24 Sep 2026",status:"new",lastContact:"—",nextFollowUp:"2026-09-29",notes:"BRAND NEW — 2 days ago! Needs warehouse space near KLIA. EBP VII is <10km from KLIA. Country Head: Alvin Williams."},
+  {id:"H07",name:"Alvin Williams",title:"Country Head — Malaysia",company:"Lion Parcel Malaysia",industry:"Logistics / E-commerce",email:"",phone:"",linkedin:"",location:"Subang Jaya / KLIA",signal_type:"NEW COUNTRY HEAD",priority:"HIGHEST",signal:"Leading MY expansion. Network covers Johor/Sabah/Sarawak, expanding north. Needs distribution infrastructure.",source:"PRNewswire 24 Sep 2026",status:"new",lastContact:"—",nextFollowUp:"2026-09-29",notes:"Direct country lead. Contact about warehouse/storage near KLIA."},
+  {id:"H08",name:"Jeanie Tan",title:"CCO Logistics APAC",company:"DP World",industry:"Logistics / Port / Supply Chain",email:"",phone:"",linkedin:"",location:"Singapore / Johor",signal_type:"NEW MY WAREHOUSE",priority:"HIGH",signal:"Opened 11,514sqm warehouse in Johor Aug 2026. 2nd in KL coming 2026.",source:"Malay Mail Aug 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-01",notes:"Global port/logistics giant expanding in MY."},
+  {id:"H09",name:"Dato' Seri Azmir Merican",title:"Group MD & CEO",company:"Sime Darby Property Bhd",industry:"Property — Industrial/Logistics Parks",email:"",phone:"",linkedin:"simedarbyproperty.com",location:"KL/Selangor",signal_type:"RM1B INDUSTRIAL FUND — EXPANSION",priority:"HIGH",signal:"RM1B Industrial Dev Fund. E-Metro >4.2M sqft. Metrohub 4 (1.38M sqft) completed. Mixue pre-committed.",source:"IRHM/ESR Jul 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-01",notes:"Major industrial/logistics developer."},
+  {id:"H10",name:"Cheryl Lim",title:"Director of Property Dev",company:"AME Development Sdn Bhd",industry:"Industrial Property Developer",email:"",phone:"",linkedin:"amedev.com.my",location:"Senai/SiLC Johor",signal_type:"NEW LAUNCH i-TechValley RM1.5B",priority:"HIGH",signal:"170ac gated industrial park in SiLC Johor. RM1.5B GDV. 72 plots from RM10M.",source:"The Edge Aug 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-01",notes:"Boutique industrial developer. Customised factory solutions."},
+  {id:"H11",name:"Mark Fong",title:"CEO",company:"Empyrion Digital",industry:"Data Centre Developer",email:"",phone:"",linkedin:"empyriondigital.com",location:"Singapore/Johor",signal_type:"200+MW DC CAMPUS",priority:"HIGH",signal:"200+MW hyperscale DC in Nusajaya Johor. 34.9ac site. Phase 1 RFS Q4 2026.",source:"Empyrion Digital Dec 2025",status:"new",lastContact:"—",nextFollowUp:"2026-10-02",notes:"Next-gen DC operator. May expand to NS per analyst predictions."},
+  {id:"H12",name:"Robin Khuda",title:"Founder & CEO",company:"AirTrunk (Blackstone)",industry:"Data Centre — Hyperscale",email:"",phone:"",linkedin:"airtrunk.com",location:"Australia/SG/Johor",signal_type:"MYR27B COMMITTED — EXPANDING BEYOND JOHOR",priority:"HIGH",signal:"700MW+ in MY. MYR27B committed. CEO: 'planning further expansion in Malaysia, both within Johor and across the country'.",source:"AirTrunk/Mingtiandi Sep 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-02",notes:"CEO hinted expansion beyond Johor — NS is next logical DC hotspot per industry analysts."},
 ];
 
 // === WARM LEADS (Priority 2) ===
 ZR.WARM_LEADS = [
+  // Batch 1
   {id: "W01", name: "Datuk Chang Khim Wah", title: "President & CEO", company: "EcoWorld Malaysia", 
     industry: "Property Developer", email: "", phone: "", linkedin: "ecoworld.my",
     location: "KL", signal_type: "RECORD SALES", priority: "MEDIUM",
@@ -92,9 +102,22 @@ ZR.WARM_LEADS = [
     signal: "MD in Seremban. Business development focus.",
     source: "LinkedIn", status: "new", lastContact: "—", nextFollowUp: "2026-10-07",
     notes: "Materials manufacturer in NS. Potential expansion need."},
+
+  // ===== BATCH 2: More developers, DC, government (26 Sep) =====
+  {id:"W08",name:"Datuk Voon Tin Yow",title:"CEO (new Apr 2026)",company:"IOI Properties Bhd",industry:"Property Developer",email:"",phone:"",linkedin:"ioiproperties.com.my",location:"KL",signal_type:"CEO CHANGE — EX-ECOWORLD",priority:"MEDIUM",signal:"New CEO Apr 2026. 35yrs exp. Previously Exe Dir at EcoWorld. Deep industrial network.",source:"The Edge Sep 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-05",notes:"Former EcoWorld senior. Strong industrial network. Could connect to EBP VII."},
+  {id:"W09",name:"Datuk Zaini Yusoff",title:"President & CEO",company:"S P Setia Bhd",industry:"Property Developer",email:"",phone:"",linkedin:"spsetia.com",location:"KL/Penang",signal_type:"NEW 509ac INDUSTRIAL PARK",priority:"MEDIUM",signal:"Setia Fontaines Industrial Park Penang. 509ac light/medium industrial. PM Anwar attended groundbreaking.",source:"The Edge Jun 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-05",notes:"Major developer entering industrial."},
+  {id:"W10",name:"Datuk Stewart LaBrooy",title:"Director",company:"Compass IP (PNB+KWAP+AREA JV)",industry:"Industrial Park Developer",email:"",phone:"",linkedin:"",location:"Selangor",signal_type:"RM1.2B GREEN INDUSTRIAL PARK",priority:"MEDIUM",signal:"Compass @ Kota Seri Langat. 220ac freehold. RM1.2B GDV. Green certified. Built-to-suit warehouses.",source:"The Edge Aug 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-07",notes:"PNB+KWAP JV. First sustainable industrial park in Selangor."},
+  {id:"W11",name:"Ng Teck Hua",title:"Executive Director",company:"Setia Awan Group",industry:"Property Developer",email:"",phone:"",linkedin:"",location:"Perak",signal_type:"MAIDEN INDUSTRIAL PROJECT",priority:"MEDIUM",signal:"First industrial project: 447ac in Tanjong Malim. GDV RM690.5M. Next to Proton City/Geely.",source:"The Edge Aug 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-07",notes:"New entrant. Learning phase. May need partners."},
+  {id:"W12",name:"YB Teo Kok Seong",title:"EXCO Industry & Non-Muslim Affairs",company:"Negeri Sembilan State Govt",industry:"Government — Policy Maker",email:"",phone:"",linkedin:"",location:"Seremban, NS",signal_type:"POLICY MAKER — NS INDUSTRY",priority:"MEDIUM",signal:"Officiated iCents (Apr) and Mahsuri (May) launches. Key decision maker for NS industrial policy.",source:"MIDA Apr/May 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-07",notes:"Can open doors for EBP VII promotions at state level."},
+  {id:"W13",name:"Dato' Hj Najmuddin Sharif",title:"CEO",company:"Invest Negeri Sembilan",industry:"Government Investment Agency",email:"",phone:"",linkedin:"",location:"Seremban, NS",signal_type:"GATEKEEPER — NS INVESTMENT",priority:"MEDIUM",signal:"Key figure for industrial investment in NS. Present at iCents + Mahsuri launches.",source:"MIDA/The Star 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-07",notes:"State investment promotion CEO. Can connect to all major investors."},
+  {id:"W14",name:"Sr (Dr) Samuel Tan",title:"Founder & CEO",company:"Olive Tree Property Consultants",industry:"Property Consultancy — DC Specialist",email:"",phone:"",linkedin:"",location:"KL",signal_type:"INDUSTRY EXPERT — NS DC HOTSPOT",priority:"MEDIUM",signal:"Published 'Why NS is next DC hotspot' (Jun 2026). Deep market knowledge.",source:"w.media Jun 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-07",notes:"Valuable source of referrals and market intel."},
+  {id:"W15",name:"Darryll Sinnappa",title:"Country Head — Malaysia",company:"ST Telemedia Global Data Centres",industry:"Data Centre — Global",email:"",phone:"",linkedin:"",location:"Johor",signal_type:"FLAGSHIP MY CAMPUS — USD1.37B",priority:"MEDIUM",signal:"STT Johor 166MW campus. USD1.37B green financing secured. First phase in Johor.",source:"STT GDC Aug 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-10",notes:"Global DC operator with massive MY commitment. Future NS expansion possible."},
+  {id:"W16",name:"Serene Nah",title:"MD & Head of APAC",company:"Digital Realty",industry:"Data Centre — Global NYSE",email:"",phone:"",linkedin:"digitalrealty.com",location:"Singapore/Cyberjaya",signal_type:"LAUNCHED MY — EVALUATING JOHOR",priority:"MEDIUM",signal:"Cyberjaya campus (32MW). Confirmed evaluating Johor sites. NYSE listed.",source:"Tech News Guru Jun 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-10",notes:"Global DC operator evaluating sites beyond Cyberjaya."},
+  {id:"W17",name:"Frederic Devos",title:"CEO",company:"DDSP (BlackRock-backed)",industry:"Data Centre Developer",email:"",phone:"",linkedin:"",location:"Singapore/Johor",signal_type:"USD283M GREEN FINANCING",priority:"MEDIUM",signal:"45MW liquid-cooled DC in Sedenak. Fully pre-leased to hyperscale. 1.1GW across APAC.",source:"MLQ News 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-10",notes:"BlackRock-backed DC developer. Growing."},
+  {id:"W18",name:"Datuk Seri Yeoh Seok Hong",title:"Managing Director",company:"YTL Power International Bhd",industry:"Data Centre / Utilities",email:"",phone:"",linkedin:"ytl.com",location:"KL/Johor",signal_type:"GIGAWATT DC CAMPUS",priority:"MEDIUM",signal:"Up to 1.2GW DC campus in Sedenak (JLand JV). YTL Green DC Park in Kulai.",source:"NST Aug 2026",status:"new",lastContact:"—",nextFollowUp:"2026-10-10",notes:"Major DC + power play by YTL."},
 ];
 
-// === COLD LEADS (Priority 3 — need research) ===
+// === COLD LEADS (Priority 3) ===
 ZR.COLD_LEADS = [
   {id: "C01", name: "Dr. Lei Zhou", title: "Group CEO/President", company: "Dunham-Bush International", 
     industry: "HVAC / Manufacturing", email: "", phone: "+603-8924 9000", linkedin: "", 
@@ -111,6 +134,8 @@ ZR.COLD_LEADS = [
     location: "Subang Jaya", signal_type: "BOARD", priority: "LOW",
     signal: "Board chairman of listed cleanroom company.",
     source: "MIDA/The Star Apr 2026", status: "cold"},
+  {id:"C04",name:"Jeffrey Shen",title:"Co-founder & Co-CEO",company:"ESR",industry:"Real Asset Manager",email:"",phone:"",linkedin:"esr.com",location:"APAC",signal_type:"USD1B FUND",priority:"LOW",signal:"CAF II fund backs 510MW DC in Pasir Gudang.",source:"Mingtiandi 2026",status:"cold"},
+  {id:"C05",name:"Cheam Tat Inn",title:"MD — Malaysia",company:"Equinix",industry:"Data Centre — Global",email:"",phone:"",linkedin:"equinix.com.my",location:"KL",signal_type:"MY OPERATIONS",priority:"LOW",signal:"MD of Equinix MY. Mentioned in Reuters DC article.",source:"Reuters Jul 2026",status:"cold"},
 ];
 
 // Export for page display
